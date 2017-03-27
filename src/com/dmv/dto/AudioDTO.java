@@ -1,9 +1,11 @@
 package com.dmv.dto;
 
+import java.util.Date;
+
 public class AudioDTO {
     private int id;
     private String name;
-    private int data;
+    private Date data;
     private String audio;
 
     public int getId() {
@@ -22,11 +24,11 @@ public class AudioDTO {
         this.name = name;
     }
 
-    public int getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

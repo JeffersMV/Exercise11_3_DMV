@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<jsp:useBean id="dtoList" scope="request" type="java.util.List"/>--%>
 <html>
 <head>
     <title>DMV — Уроки гитары в Минске</title>
@@ -17,7 +17,6 @@
     <link rel="stylesheet" type="text/css" href="css/bottom.css">
 </head>
 <body>
-
 <div style="position: relative">
     <header>
         <div class="header">
@@ -43,39 +42,34 @@
                 <a href="${pageContext.request.contextPath}/ShowServlet" title="Здесь ссылка на главную">Главная</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?p=about_myself"
-                   title="Здесь информация о компании">О себе</a>
+                <a href="${pageContext.request.contextPath}/ShowServlet?action=about_myself"
+                   title="Здесь информация о cебе">О себе</a>
             </li>
             <li>
-                <a href="" title="Здесь будут ваши услуги">Галерея</a>
+                <a href="" title="Здесь галерея Аудио Видео Фато">Галерея</a>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/ShowServlet?p=audio">Аудио</a></li>
-                    <li><a href="${pageContext.request.contextPath}/ShowServlet?p=video">Видео</a></li>
-                    <li><a href="${pageContext.request.contextPath}/ShowServlet?p=photo">Фото</a></li>
+                    <li><a href="${pageContext.request.contextPath}/ShowServlet?action=audio">Аудио</a></li>
+                    <li><a href="${pageContext.request.contextPath}/ShowServlet?action=video">Видео</a></li>
+                    <li><a href="${pageContext.request.contextPath}/ShowServlet?action=photo">Фото</a></li>
                 </ul>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?p=cost"
-                   title="Здесь разместите ссылки на ваши продукты">Стоимость</a>
+                <a href="${pageContext.request.contextPath}/ShowServlet?action=cost" title="Стоимость">Стоимость</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?p=reviews"
-                   title="Здесь разместите ссылки на ваши продукты">Отзывы</a>
+                <a href="${pageContext.request.contextPath}/ShowServlet?action=reviews" title="Отзывы">Отзывы</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/ShowServlet?p=contacts"
-                   title="Здесь напишите свои контакты">Контакты</a>
+                <a href="${pageContext.request.contextPath}/ShowServlet?action=contacts" title="Контакты">Контакты</a>
             </li>
         </ul>
 
     </header>
     <%----------------------------------------------EXCHANGE------------------------------------------------%>
-
     <div class="exchange">
         <core:choose>
             <%--О СЕБЕ--%>
-            <core:when test="${param.get('p') == 'about_myself'}">
-
+            <core:when test="${param.get('action') == 'about_myself'}">
                 <div class="replaceable_body">
                     <div class="avatar">
                         <img src="resource/img/Mike.jpg" width="350px">
@@ -132,16 +126,16 @@
                         игре на гитаре;
                         игре на барабанах;
                         студийной звукорежиссуре.
-
                     </p>
                 </div>
             </core:when>
             <%--AUDIO--%>
-            <core:when test="${param.get('p') == 'audio'}">
+            <core:when test="${param.get('action') == 'audio'}">
                 <div class="replaceable_body">
                     <ul class="double">
+                            <%--@elvariable id="dtoList" type="java.util.List"--%>
                         <core:forEach var="dto" items="${dtoList}">
-                            <li><p>${dto.id} - ${dto.name}</p>
+                            <li><p>${dto.id}|<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.data}"/>|${dto.name}</p>
                                 <audio controls style="width: 480px">
                                     <source src="${dto.audio}" type="audio/mpeg">
                                     Тег audio не поддерживается вашим браузером.
@@ -153,11 +147,12 @@
                 </div>
             </core:when>
             <%--VIDEO--%>
-            <core:when test="${param.get('p') == 'video'}">
+            <core:when test="${param.get('action') == 'video'}">
                 <div class="replaceable_body">
                     <ul class="double">
+                            <%--@elvariable id="dtoList" type="java.util.List"--%>
                         <core:forEach var="dto" items="${dtoList}">
-                            <li><p>${dto.id} - ${dto.name}</p>
+                            <li><p>${dto.id}|<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.data}"/>|${dto.name}</p>
                                 <iframe width="480" height="270" src="${dto.video}" frameborder="0" allowfullscreen
                                         align="center"></iframe>
                             </li>
@@ -166,11 +161,12 @@
                 </div>
             </core:when>
             <%--PHOTO--%>
-            <core:when test="${param.get('p') == 'photo'}">
+            <core:when test="${param.get('action') == 'photo'}">
                 <div class="replaceable_body">
                     <ul class="double">
+                            <%--@elvariable id="dtoList" type="java.util.List"--%>
                         <core:forEach var="dto" items="${dtoList}">
-                            <li><p>${dto.id} - ${dto.name}</p>
+                            <li><p>${dto.id}|<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.data}"/>|${dto.name}</p>
                                 <img src="${dto.photo}" width="480">
                             </li>
                         </core:forEach>
@@ -178,98 +174,98 @@
                 </div>
             </core:when>
             <%--СТОИМОСТЬ--%>
-            <core:when test="${param.get('p') == 'cost'}">
-            <div class="replaceable_body">
-                <table class="cost">
-                    <colgroup>
-                        <col class="">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th rowspan="2"></th>
-                        <th>
-                            Абонемент на 1 месяц
-                            <p style="text-align: center">(8 занятий)</p>
-                        </th>
-                        <th>
-                            Базовый курс — 3 месяца
+            <core:when test="${param.get('action') == 'cost'}">
+                <div class="replaceable_body">
+                    <table class="cost">
+                        <colgroup>
+                            <col class="">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2"></th>
+                            <th>
+                                Абонемент на 1 месяц
+                                <p style="text-align: center">(8 занятий)</p>
+                            </th>
+                            <th>
+                                Базовый курс — 3 месяца
 
-                            <p style="text-align: center">(24 занятия)</p>
-                        </th>
-                        <th>
-                            Базовый курс — 4 месяца
+                                <p style="text-align: center">(24 занятия)</p>
+                            </th>
+                            <th>
+                                Базовый курс — 4 месяца
 
-                            <p style="text-align: center">(32 занятия)</p>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Индивидуально</td>
-                        <td style="text-align: center;">
-                            <strong> 134 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong> 402 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong>536 руб. </strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Парные</td>
-                        <td style="text-align: center;">
-                            <strong> 76 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong>228 руб. </strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong>304 руб. </strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Малая группа (3-4 чел.)</td>
-                        <td style="text-align: center;">
-                            <strong> 67 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong> 201 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong>268 руб.</strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Группа (5-7 чел.)</td>
-                        <td style="text-align: center;">
-                            <strong> 54 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong> 162 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong>216 руб.</strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Занятия у Вас дома!</td>
-                        <td style="text-align: center;">
-                            <strong> 160 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong> 480 руб.</strong>
-                        </td>
-                        <td style="text-align: center;">
-                            <strong>640 руб.</strong>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                                <p style="text-align: center">(32 занятия)</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Индивидуально</td>
+                            <td style="text-align: center;">
+                                <strong> 134 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong> 402 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong>536 руб. </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Парные</td>
+                            <td style="text-align: center;">
+                                <strong> 76 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong>228 руб. </strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong>304 руб. </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Малая группа (3-4 чел.)</td>
+                            <td style="text-align: center;">
+                                <strong> 67 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong> 201 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong>268 руб.</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Группа (5-7 чел.)</td>
+                            <td style="text-align: center;">
+                                <strong> 54 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong> 162 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong>216 руб.</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Занятия у Вас дома!</td>
+                            <td style="text-align: center;">
+                                <strong> 160 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong> 480 руб.</strong>
+                            </td>
+                            <td style="text-align: center;">
+                                <strong>640 руб.</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </core:when>
             <%--ОТЗЫВЫ--%>
-            <core:when test="${param.get('p') == 'reviews'}">
+            <core:when test="${param.get('action') == 'reviews'}">
                 <div class="replaceable_body">
                     <p>
                         Анастасия:<br>
@@ -313,22 +309,62 @@
                 </div>
             </core:when>
             <%--КОНТАКТЫ--%>
-            <core:when test="${param.get('p') == 'contacts'}">
+            <core:when test="${param.get('action') == 'contacts'}">
                 <div class="replaceable_body" style="text-align: center">
                     <p style="text-align: center; margin-top: 75px; font-size: 26px">+375 29 254 24 91</p>
                     <p style="text-align: center">Viber: +375 29 254 24 91</p>
                     <p style="text-align: center">Skype: dmv.com</p>
-                    <iframe class="contacts" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.2499034291304!2d27.4940230242791!3d53.909535008103106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbc545f13526d9%3A0x6858a3626c124c34!2z0J_Rg9GI0LrQuNC90YHQutCw0Y8!5e0!3m2!1sru!2sby!4v1490357860100"
+                    <iframe class="contacts"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.2499034291304!2d27.4940230242791!3d53.909535008103106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbc545f13526d9%3A0x6858a3626c124c34!2z0J_Rg9GI0LrQuNC90YHQutCw0Y8!5e0!3m2!1sru!2sby!4v1490357860100"
                             width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    <p style="text-align: center">Помогите нам стать лучше! Если у вас есть предложения по улучшению работы студии - высылайте на
+                    <p style="text-align: center">Помогите нам стать лучше! Если у вас есть предложения по улучшению
+                        работы студии - высылайте на
                         dmv@gmail.com.</p>
                 </div>
             </core:when>
             <%--ERROR--%>
-            <core:when test="${param.get('p') == 'error'}">
+            <core:when test="${param.get('action') == 'error'}">
                 <div class="replaceable_body">
-                    <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
-                        Ошибка подключения к серверу!
+                    <core:if test="${param.get('error') == 'name_error'}">
+                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                            Введите пожалуйста Ваше имя!
+                        </p>
+                    </core:if>
+                    <core:if test="${param.get('error') == 'phone_error'}">
+                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                            Введите пожалуйста Ваш номер телефона!
+                        </p>
+                    </core:if>
+                    <core:if test="${param.get('error') == 'e-mail_error'}">
+                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                            Введите пожалуйста Ваш E-mail!
+                        </p>
+                    </core:if>
+                    <core:if test="${param.get('error') == 'connect_BD'}">
+                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                            Ошибка подключения, не могу достучаться до Базы Данных!
+                        </p>
+                    </core:if>
+                    <core:if test="${param.get('error') == 'send_e-mail'}">
+                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                            Ошибка отправки данных, какой-то сбой в программе произошёл при отправки!
+                            Пожалуйста воспользуйтесь вкладкой КОНТАКТЫ и выберети сбособ связи удобный для Вас!
+                        </p>
+                    </core:if>
+                    <core:if test="${param.get('error') == 'server'}">
+                        <p style="text-align: center; font-size: 30px; font-style: oblique; color: #c60016">
+                            Ошибка приложения, какой-то сбой в программе!
+                        </p>
+                    </core:if>
+                </div>
+            </core:when>
+            <%--ACTION--%>
+            <core:when test="${param.get('action') == 'SEND'}">
+                <div class="replaceable_body">
+                    <p style="text-align: center; font-size: 30px; font-style: oblique; color: #000000">
+                        Заявка отправлена ${param.get('name')} c ${param.get('e-mail')}!<br>
+                        Вам перезвонят в течение дня на номер<br>
+                        "${param.get('phone')}"!
                     </p>
                 </div>
             </core:when>
@@ -359,18 +395,18 @@
             </core:otherwise>
         </core:choose>
     </div>
-<%----------------------------------------------------BOT-----------------------------------------------------%>
+    <%----------------------------------------------------BOT-----------------------------------------------------%>
     <div class="bot">
         <div id="bottom">
             <p>
                 ОТПРАВИТЬ ЗАЯВКУ
             </p>
             <div>
-                <form action="ShowServlet" method="POST">
-                    <input type="text" name="firstName" value="" required placeholder="Ваше имя"><br>
-                    <input type="text" name="phone" value="" required placeholder="+375 __ ___ __ __"><br>
-                    <input type="text" name="e-mail" value="" required placeholder="E-mail"><br>
-                    <input type="button" name="action" value="ЗАПИСАТЬСЯ">
+                <form action="ShowServlet" method="get" novalidate="novalidate">
+                    <input type="text" name="name" value="" required="required" placeholder="Ваше имя"/><br>
+                    <input type="text" name="phone" value="" required="required" placeholder="+375 __ ___ __ __"/><br>
+                    <input type="text" name="e-mail" value="" required="required" placeholder="E-mail"/><br>
+                    <input type="submit" name="action" value="SEND"/>
                 </form>
             </div>
         </div>

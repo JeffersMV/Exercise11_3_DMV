@@ -1,9 +1,11 @@
 package com.dmv.dto;
 
+import java.util.Date;
+
 public class VideoDTO {
     private int id;
     private String name;
-    private int data;
+    private Date data;
     private String video;
 
     public int getId() {
@@ -22,11 +24,11 @@ public class VideoDTO {
         this.name = name;
     }
 
-    public int getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

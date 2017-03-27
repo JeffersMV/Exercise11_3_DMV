@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class AudioDAO extends DaoAbstract<AudioDTO, Integer> {
+public class AudioDAO extends DaoAbstract<AudioDTO> {
 
     public AudioDAO(Connection connection) throws DaoException, SQLException {
         super(connection);
@@ -28,7 +28,7 @@ public class AudioDAO extends DaoAbstract<AudioDTO, Integer> {
                 AudioDTO audioDTO = new AudioDTO();
                 audioDTO.setId(rs.getInt(1));
                 audioDTO.setName(rs.getString(2));
-                audioDTO.setData(rs.getInt(3));
+                audioDTO.setData(rs.getDate(3));
                 audioDTO.setAudio(rs.getString(4));
                 lst.add(audioDTO);
             }

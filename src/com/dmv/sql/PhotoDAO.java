@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class PhotoDAO extends DaoAbstract<PhotoDTO, Integer> {
+public class PhotoDAO extends DaoAbstract<PhotoDTO> {
 
     public PhotoDAO(Connection connection) throws DaoException, SQLException {
         super(connection);
@@ -30,7 +30,7 @@ public class PhotoDAO extends DaoAbstract<PhotoDTO, Integer> {
                 PhotoDTO photoDTO = new PhotoDTO();
                 photoDTO.setId(rs.getInt(1));
                 photoDTO.setName(rs.getString(2));
-                photoDTO.setData(rs.getInt(3));
+                photoDTO.setData(rs.getDate(3));
                 photoDTO.setPhoto(rs.getString(4));
                 lst.add(photoDTO);
             }

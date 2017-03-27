@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class VideoDAO extends DaoAbstract<VideoDTO, Integer> {
+public class VideoDAO extends DaoAbstract<VideoDTO> {
 
     public VideoDAO(Connection connection) throws DaoException, SQLException {
         super(connection);
@@ -30,7 +30,7 @@ public class VideoDAO extends DaoAbstract<VideoDTO, Integer> {
                 VideoDTO videoDTO = new VideoDTO();
                 videoDTO.setId(rs.getInt(1));
                 videoDTO.setName(rs.getString(2));
-                videoDTO.setData(rs.getInt(3));
+                videoDTO.setData(rs.getDate(3));
                 videoDTO.setVideo(rs.getString(4));
                 lst.add(videoDTO);
             }
